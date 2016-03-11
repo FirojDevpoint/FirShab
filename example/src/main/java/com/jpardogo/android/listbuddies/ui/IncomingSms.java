@@ -41,6 +41,7 @@ public class IncomingSms extends BroadcastReceiver {
 
 			        Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
+
 					Repo repoObject;
 					repoObject = MainActivity.getRepo();
 

@@ -7,6 +7,8 @@ import com.j256.ormlite.android.apptools.OpenHelperManager;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 
 
+
+
 public class DatabaseManager<H extends OrmLiteSqliteOpenHelper> {
 	
 	private H helper;

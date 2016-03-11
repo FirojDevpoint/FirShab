@@ -20,6 +20,8 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 
 
 
+
+
 	private static String DATABASE_NAME = "Shabnaz.db";
 	private static int DATABASE_VERSION = 1;
 

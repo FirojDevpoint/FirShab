@@ -19,6 +19,8 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
 
 	//Path to the device folder with databases
 
+
+
 	private static String DATABASE_NAME = "Shabnaz.db";
 	private static int DATABASE_VERSION = 1;
     private static String DB_PATH = "";

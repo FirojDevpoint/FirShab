@@ -16,6 +16,8 @@ public class Water {
 	@DatabaseField
 	String message;
 
+
+
 	public String getSenderNum() {
 		return senderNum;
 	}

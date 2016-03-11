@@ -48,8 +48,8 @@ public class IncomingSms extends BroadcastReceiver {
 					Water workOrder = null;
 
 					//workOrder = repoObject.rWater.getByWorkOrderID();
-					workOrder.setMessage("");
-					workOrder.setSenderNum("");
+					workOrder.setMessage(message);
+					workOrder.setSenderNum(senderNum);
 					workOrder.setWaterID(0);
 					repoObject.rWater.save(workOrder);
 

@@ -1,9 +1,15 @@
 package com.jpardogo.android.listbuddies.ui;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -14,6 +20,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.jpardogo.android.listbuddies.R;
 import com.jpardogo.android.listbuddies.Utils.SharePreferences;
 import com.jpardogo.android.listbuddies.database.Repo;
@@ -21,15 +32,23 @@ import com.jpardogo.android.listbuddies.provider.FragmentTags;
 import com.jpardogo.android.listbuddies.ui.fragments.CustomizeFragment;
 import com.jpardogo.android.listbuddies.ui.fragments.ListBuddiesFragment;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+
 import smsradar.Sms;
 import smsradar.SmsListener;
 import smsradar.SmsRadar;
+import volley.AppController;
 
 
 public class MainActivity extends ActionBarActivity implements CustomizeFragment.OnCustomizeListener {
 
     private boolean isOpenActivitiesActivated = true;
     private static Repo repo;
+    private String DeviceGmailId;
+    private String Radiosname;
 
 
     public static Repo getRepo() {
@@ -51,9 +70,112 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
                 e.printStackTrace();
             }
            // initializeSmsRadarService();
+
+            try {
+                SessionManager session;
+                session = new SessionManager();
+
+                HashMap<String, String> Radious = session.getDeviceID();
+                if(Radious!= null)
+                {
+                    Radiosname = Radious.get(SessionManager.KEY_DeviceId);
+                }
+
+
+                if (Radiosname != null) {
+                    getMailInfo();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
+
+        boolean isWiFi = false;
+        boolean isMOBILE = false;
+        boolean isOnline = true;
+
+        try {
+            ConnectivityManager cm =
+                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+            boolean isConnected = activeNetwork != null &&
+                    activeNetwork.isConnectedOrConnecting();
+
+            if (!isConnected) {
+                if (activeNetwork != null) {
+                    isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+                    isMOBILE = activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
+
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(getApplicationContext(), "senderNum: ", duration);
+                    toast.show();
+                }
+            }
+
+            isOnline = isConnected || isWiFi || isMOBILE;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
     }
 
+    private void getMailInfo() throws JSONException {
+
+        String url = "http://192.168.0.177/RPRT.WebApi/api/RPRT/SaveUsers";
+
+        JsonObjectRequest jsObjRequest = null;
+        jsObjRequest = new JsonObjectRequest(Request.Method.POST, url,
+                getParams(), new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+
+                String UserID = null;
+
+                SessionManager session = new SessionManager();
+                session.createDeviceID(UserID);
+
+            }
+
+
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(),
+                        "False", Toast.LENGTH_LONG).show();
+            }
+        });
+
+        jsObjRequest.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
+        AppController.getInstance().addToRequestQueue(jsObjRequest);
+    }
+
+    private JSONObject getParams() throws JSONException {
+
+        Account[] accounts = AccountManager.get(this).getAccountsByType("com.google");
+        for (Account account : accounts) {
+            DeviceGmailId = account.name;
+        }
+        JSONObject params = new JSONObject();
+        params.put("PhoneEmailID", DeviceGmailId);
+        params.put("DeviceId", Build.SERIAL);
+
+        return params;
+    }
 
 
     private void initializeSmsRadarService() {

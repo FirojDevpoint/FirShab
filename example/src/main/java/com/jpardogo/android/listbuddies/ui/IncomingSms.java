@@ -9,6 +9,11 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.jpardogo.android.listbuddies.database.Repo;
+import com.jpardogo.android.listbuddies.database.model.Water;
+
+import java.util.List;
+
 
 public class IncomingSms extends BroadcastReceiver {
 	
@@ -36,12 +41,21 @@ public class IncomingSms extends BroadcastReceiver {
 
 			        Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
+					Repo repoObject;
+					repoObject = MainActivity.getRepo();
+
+					Water workOrder = null;
+
+					//workOrder = repoObject.rWater.getByWorkOrderID();
+					workOrder.setMessage("");
+					workOrder.setSenderNum("");
+					workOrder.setWaterID(0);
+					repoObject.rWater.save(workOrder);
 
 
 
 
-			        
-			        int duration = Toast.LENGTH_LONG;
+				int duration = Toast.LENGTH_LONG;
 					Toast toast = Toast.makeText(context, "senderNum: "+ senderNum + ", message: " + message, duration);
 					toast.show();
 					

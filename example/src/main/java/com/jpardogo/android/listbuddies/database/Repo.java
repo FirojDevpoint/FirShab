@@ -5,13 +5,15 @@ import java.sql.SQLException;
 
 
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 public class Repo {
 	public DatabaseNGISHelper db;
 
 	public RepoWater rWater;
 
-	
+
+
 	public Repo(Context context) throws SQLException
 	{
 		DatabaseManager<DatabaseNGISHelper> manager = new DatabaseManager<DatabaseNGISHelper>();

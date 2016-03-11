@@ -4,6 +4,7 @@ package com.jpardogo.android.listbuddies.database;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.PreparedQuery;
 import com.j256.ormlite.stmt.QueryBuilder;
+import com.j256.ormlite.stmt.Where;
 import com.jpardogo.android.listbuddies.database.model.Water;
 
 import java.sql.SQLException;
@@ -70,6 +71,37 @@ public class RepoWater {
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+
+	public Water getByMobWorkOrderID2( int mobWorkOrderID)
+	{
+		try {
+			QueryBuilder<Water, String> qb = waterDao.queryBuilder();
+			Where<Water, String> where = qb.where();
+			where.eq("WoterID", mobWorkOrderID);
+			PreparedQuery<Water> pq = qb.prepare();
+			return waterDao.queryForFirst(pq);
+		} catch (SQLException e) {
+			// TODO: Exception Handling
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public int save(Water obj)
+	{
+		Water queryObj = this.getByMobWorkOrderID2(obj.getWaterID());
+
+		if(queryObj == null)
+		{
+			return this.create(obj);
+		}
+		else
+		{
+			return this.update(obj);
+		}
+
 	}
 	
 }

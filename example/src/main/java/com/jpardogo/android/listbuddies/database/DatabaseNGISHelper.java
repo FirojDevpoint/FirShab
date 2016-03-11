@@ -76,14 +76,6 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 		}
 	}
 
-//	public Dao<WorkOrder, String> getworkOrderDao() throws SQLException {
-//		if (workOrderDao == null) {
-//			ConnectionSource c = getConnectionSource();
-//			workOrderDao = DaoManager.createDao(getConnectionSource(),
-//					WorkOrder.class);
-//		}
-//		return workOrderDao;
-//	}
 	
 	
 	public Dao<Water, String> getwaterDao() throws SQLException {

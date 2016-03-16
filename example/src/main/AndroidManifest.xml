@@ -43,6 +43,19 @@
             </intent-filter>
         </receiver>
 
+
+        <receiver
+            android:name="com.devpoint.rprtgnet.NetworkChangeReciever"
+            android:label="NetworkChangeReciiever" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+
+
+
+
         <activity
             android:name=".ui.DetailActivity"
             android:parentActivityName=".ui.MainActivity"

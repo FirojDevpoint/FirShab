@@ -49,6 +49,7 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
     private static Repo repo;
     private String DeviceGmailId;
     private String Radiosname;
+    public static Boolean isOnline;
 
 
     public static Repo getRepo() {

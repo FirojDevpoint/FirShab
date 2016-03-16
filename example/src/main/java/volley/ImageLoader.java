@@ -19,7 +19,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.widget.ImageView;
 
-import com.jpardogo.android.listbuddies.R;
+import com.firoj.shabnaz.R;
+
 
 public class ImageLoader {
     

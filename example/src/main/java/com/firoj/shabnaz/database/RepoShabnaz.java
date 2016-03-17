@@ -93,7 +93,7 @@ public class RepoShabnaz {
 		try {
 			QueryBuilder<Shabnaz, String> qb = shabnazDao.queryBuilder();
 			Where<Shabnaz, String> where = qb.where();
-			where.eq("WoterID", mobWorkOrderID);
+			where.eq("ShabnazID", mobWorkOrderID);
 			PreparedQuery<Shabnaz> pq = qb.prepare();
 			return shabnazDao.queryForFirst(pq);
 		} catch (SQLException e) {

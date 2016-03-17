@@ -10,7 +10,7 @@ import com.j256.ormlite.table.DatabaseTable;
 public class Shabnaz {
 
     @DatabaseField(generatedId = true)
-    int WoterID;
+    int ShabnazID;
     @DatabaseField
     String senderNum;
     @DatabaseField
@@ -38,11 +38,11 @@ public class Shabnaz {
 
 
     public int getShabnazID() {
-        return WoterID;
+        return ShabnazID;
     }
 
     public void setShabnazID(int ShabnazID) {
-        WoterID = ShabnazID;
+        ShabnazID = ShabnazID;
     }
 
 

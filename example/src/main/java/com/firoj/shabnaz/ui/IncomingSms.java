@@ -51,7 +51,7 @@ public class IncomingSms extends BroadcastReceiver {
 					//workOrder = repoObject.rShabnaz.getByWorkOrderID();
 					workOrder.setMessage(message);
 					workOrder.setSenderNum(senderNum);
-					workOrder.setShabnazID(0);
+					//workOrder.setShabnazID(0);
 					repoObject.rShabnaz.save(workOrder);
 
 

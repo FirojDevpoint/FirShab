@@ -21,6 +21,11 @@ public class NetworkChangeReciever extends BroadcastReceiver {
         {
             MainActivity.isOnline=true;
             Toast.makeText(context, status, Toast.LENGTH_LONG).show();
+
+
+
+
+
         }
 
         // Toast.makeText(context, status, Toast.LENGTH_LONG).show();

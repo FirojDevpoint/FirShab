@@ -10,7 +10,7 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.firoj.shabnaz.database.model.Water;
+import com.firoj.shabnaz.database.model.Shabnaz;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 	private static int DATABASE_VERSION = 1;
 
 
-	private Dao<Water, String> waterDao = null;
+	private Dao<Shabnaz, String> shabnazDao = null;
 	
 
 	public DatabaseNGISHelper(Context context) {
@@ -51,7 +51,7 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 			Log.i(DatabaseNGISHelper.class.getName(), "onCreate");
 
 			if (false) {
-				TableUtils.createTable(connectionSource, Water.class);
+				TableUtils.createTable(connectionSource, Shabnaz.class);
 				
 			}
 
@@ -69,7 +69,7 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 		try {
 			Log.i(DatabaseNGISHelper.class.getName(), "onUpgrade");
 			if (false) {
-				TableUtils.dropTable(connectionSource, Water.class, true);
+				TableUtils.dropTable(connectionSource, Shabnaz.class, true);
 			}
 			onCreate(db);
 		} catch (SQLException e) {
@@ -80,16 +80,16 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 
 	
 	
-	public Dao<Water, String> getwaterDao() throws SQLException {
-		if (waterDao == null) {
+	public Dao<Shabnaz, String> getshabnazDao() throws SQLException {
+		if (shabnazDao == null) {
 			ConnectionSource c = getConnectionSource();
-			waterDao = DaoManager.createDao(getConnectionSource(),
-					Water.class);
+			shabnazDao = DaoManager.createDao(getConnectionSource(),
+					Shabnaz.class);
 		}
-		return waterDao;
+		return shabnazDao;
 	}
 	
-	//getwaterDao
+	//getshabnazDao
 
 	
 

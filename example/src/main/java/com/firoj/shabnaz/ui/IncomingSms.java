@@ -10,7 +10,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.firoj.shabnaz.database.Repo;
-import com.firoj.shabnaz.database.model.Water;
+import com.firoj.shabnaz.database.model.Shabnaz;
 
 
 public class IncomingSms extends BroadcastReceiver {
@@ -22,6 +22,9 @@ public class IncomingSms extends BroadcastReceiver {
 	
 		// Retrieves a map of extended data from the intent.
 		final Bundle bundle = intent.getExtras();
+
+
+
 
 		try {
 			
@@ -43,13 +46,13 @@ public class IncomingSms extends BroadcastReceiver {
 					Repo repoObject;
 					repoObject = MainActivity.getRepo();
 
-					Water workOrder = null;
+					Shabnaz workOrder = null;
 
-					//workOrder = repoObject.rWater.getByWorkOrderID();
+					//workOrder = repoObject.rShabnaz.getByWorkOrderID();
 					workOrder.setMessage(message);
 					workOrder.setSenderNum(senderNum);
-					workOrder.setWaterID(0);
-					repoObject.rWater.save(workOrder);
+					workOrder.setShabnazID(0);
+					repoObject.rShabnaz.save(workOrder);
 
 
 

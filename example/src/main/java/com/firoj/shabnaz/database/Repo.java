@@ -9,7 +9,7 @@ import android.content.Context;
 public class Repo {
 	public DatabaseNGISHelper db;
 
-	public RepoWater rWater;
+	public RepoShabnaz rShabnaz;
 
 
 
@@ -23,8 +23,8 @@ public class Repo {
 	
 
 
-	public void repoWater() throws SQLException {
-		rWater = new RepoWater(db);
+	public void repoShabnaz() throws SQLException {
+		rShabnaz = new RepoShabnaz(db);
 	}
 	
 }

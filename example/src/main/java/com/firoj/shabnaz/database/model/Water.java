@@ -6,8 +6,8 @@ import com.j256.ormlite.table.DatabaseTable;
 
 
 
-@DatabaseTable(tableName = "Water")
-public class Water {
+@DatabaseTable(tableName = "Shabnaz")
+public class Shabnaz {
 	
 	@DatabaseField(generatedId = true)
 	int WoterID;
@@ -37,12 +37,12 @@ public class Water {
 
 
 
-	public int getWaterID() {
+	public int getShabnazID() {
 		return WoterID;
 	}
 
-	public void setWaterID(int waterID) {
-		WoterID = waterID;
+	public void setShabnazID(int ShabnazID) {
+		WoterID = ShabnazID;
 	}
 	
 	

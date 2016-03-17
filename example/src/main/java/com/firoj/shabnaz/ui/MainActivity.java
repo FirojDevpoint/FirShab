@@ -204,7 +204,7 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
         try {
             Context x = getApplicationContext();
             repo = new Repo(x);
-            repo.repoWater();
+            repo.repoShabnaz();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

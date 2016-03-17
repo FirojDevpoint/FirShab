@@ -4,10 +4,12 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.SQLException;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,6 +27,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import com.firoj.shabnaz.MySentSmsHandler;
 import com.firoj.shabnaz.R;
 import com.firoj.shabnaz.Utils.SharePreferences;
 import com.firoj.shabnaz.database.Repo;
@@ -92,36 +95,38 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
             }
         }
 
-        boolean isWiFi = false;
-        boolean isMOBILE = false;
-        boolean isOnline = true;
-
-        try {
-            ConnectivityManager cm =
-                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-
-            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-            boolean isConnected = activeNetwork != null &&
-                    activeNetwork.isConnectedOrConnecting();
-
-            if (!isConnected) {
-                if (activeNetwork != null) {
-                    isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
-                    isMOBILE = activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
-
-                    int duration = Toast.LENGTH_LONG;
-                    Toast toast = Toast.makeText(getApplicationContext(), "senderNum: ", duration);
-                    toast.show();
-                }
-            }
-
-            isOnline = isConnected || isWiFi || isMOBILE;
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
+//        boolean isWiFi = false;
+//        boolean isMOBILE = false;
+//        boolean isOnline = true;
+//
+//        try {
+//            ConnectivityManager cm =
+//                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+//
+//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+//            boolean isConnected = activeNetwork != null &&
+//                    activeNetwork.isConnectedOrConnecting();
+//
+//            if (!isConnected) {
+//                if (activeNetwork != null) {
+//                    isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
+//                    isMOBILE = activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
+//
+//                    int duration = Toast.LENGTH_LONG;
+//                    Toast toast = Toast.makeText(getApplicationContext(), "senderNum: ", duration);
+//                    toast.show();
+//                }
+//            }
+//
+//            isOnline = isConnected || isWiFi || isMOBILE;
+//        }
+//        catch (Exception e)
+//        {
+//            e.printStackTrace();
+//        }
+        ContentObserver observer=new MySentSmsHandler(getApplicationContext());
+        getApplicationContext().getContentResolver().registerContentObserver(
+                Uri.parse("content://sms"), true, observer);
 
 
 

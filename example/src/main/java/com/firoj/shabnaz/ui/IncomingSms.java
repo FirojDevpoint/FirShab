@@ -24,7 +24,11 @@ public class IncomingSms extends BroadcastReceiver {
 		final Bundle bundle = intent.getExtras();
 
 
-
+		if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
+			Toast.makeText(context, "SMS_RECEIVED", Toast.LENGTH_LONG).show();
+		}else  if(intent.getAction().equals("android.provider.Telephony.SMS_SENT")){
+			Toast.makeText(context, "SMS_SENT", Toast.LENGTH_LONG).show();
+		}
 
 		try {
 			

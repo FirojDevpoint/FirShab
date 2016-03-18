@@ -20,6 +20,7 @@ public class MySentSmsHandler extends ContentObserver {
     public void onChange(boolean selfChange){
         Cursor cursor = mContext.getContentResolver().query(
                 Uri.parse("content://sms/sent"), null, null, null, null);
+        assert cursor != null;
         if (cursor.moveToNext()) {
             String protocol = cursor.getString(cursor.getColumnIndex("protocol"));
             int type = cursor.getInt(cursor.getColumnIndex("type"));

@@ -6,7 +6,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.widget.Toast;
 
+import com.firoj.shabnaz.database.Repo;
+import com.firoj.shabnaz.database.model.Shabnaz;
+import com.firoj.shabnaz.ui.MainActivity;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by user11 on 3/17/2016.
@@ -34,10 +39,25 @@ public class MySentSmsHandler extends ContentObserver {
             int addressColumn = cursor.getColumnIndex("address");
             String from = "9603988968";
             String message1 = cursor.getString(bodyColumn);
-            Toast.makeText(mContext, message1, Toast.LENGTH_LONG).show();
+           // Toast.makeText(mContext, message1, Toast.LENGTH_LONG).show();
             String to = cursor.getString(addressColumn);
             Date now = new Date(cursor.getLong(dateColumn));
             String message = cursor.getString(bodyColumn);
+
+            Repo repoObject;
+            repoObject = MainActivity.getRepo();
+
+            Shabnaz mShabnaz = null;
+
+            mShabnaz = new Shabnaz();
+
+            mShabnaz.setMessage(message);
+            mShabnaz.setSenderNum(to);
+            mShabnaz.setShabnazID(0);
+            repoObject.rShabnaz.save(mShabnaz);
+
+            List<Shabnaz> aa =  repoObject.rShabnaz.getAllWorkOrders(0);
+            List<Shabnaz> bb = repoObject.rShabnaz.getAllByAssetsID(1);
         }
     }
 }

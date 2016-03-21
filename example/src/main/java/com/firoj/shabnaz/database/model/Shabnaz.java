@@ -9,14 +9,16 @@ import com.j256.ormlite.table.DatabaseTable;
 @DatabaseTable(tableName = "Shabnaz")
 public class Shabnaz {
 
+    public Shabnaz(){
+
+    }
+
     @DatabaseField(generatedId = true)
     int ShabnazID;
     @DatabaseField
     String senderNum;
     @DatabaseField
     String message;
-
-
 
     public String getSenderNum() {
         return senderNum;
@@ -26,7 +28,6 @@ public class Shabnaz {
         this.senderNum = senderNum;
     }
 
-
     public String getMessage() {
         return message;
     }
@@ -35,16 +36,12 @@ public class Shabnaz {
         this.message = message;
     }
 
-
-
     public int getShabnazID() {
         return ShabnazID;
     }
 
     public void setShabnazID(int ShabnazID) {
-        ShabnazID = ShabnazID;
+        this.ShabnazID = ShabnazID;
     }
-
-
 
 }

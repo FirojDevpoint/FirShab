@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.firoj.shabnaz.ui.MainActivity;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
@@ -20,10 +21,12 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 
 
 
+	//Path to the device folder with databases
+	private static final String DATABASE_NAME = MainActivity.NGIDDBName;
+	private static final int DATABASE_VERSION = MainActivity.NGIDDBNameVersion;
 
-
-	private static String DATABASE_NAME = "Shabnaz.db";
-	private static int DATABASE_VERSION = 1;
+//	private static String DATABASE_NAME = "Shabnaz.sqlite";
+//	private static int DATABASE_VERSION = 2;
 
 
 	private Dao<Shabnaz, String> shabnazDao = null;
@@ -35,7 +38,7 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 		DatabaseNGISInitializer initializer = new DatabaseNGISInitializer(
 				context);
 		try {
-			// initializer.destroyDatabase();
+			 initializer.destroyDatabase();
 			initializer.createDataBase();
 			initializer.close();
 		} catch (IOException e) {

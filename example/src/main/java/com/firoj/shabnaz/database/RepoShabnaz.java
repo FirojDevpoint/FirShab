@@ -65,7 +65,7 @@ public class RepoShabnaz {
 		try {
             QueryBuilder<Shabnaz, String> qb = shabnazDao.queryBuilder();
 			Where<Shabnaz, String> where = qb.where();
-			where.gt("Sno", assets);
+			where.gt("ShabnazID", assets);
 			PreparedQuery<Shabnaz> pq = qb.prepare();
 			return shabnazDao.query(pq);
 		} catch (SQLException e) {
@@ -77,7 +77,7 @@ public class RepoShabnaz {
 
 	public List<Shabnaz> getAllByAssetsID(int assets) {
 		try {
-			List<Shabnaz> returnVals =  shabnazDao.queryForEq("AssetID", assets);
+			List<Shabnaz> returnVals =  shabnazDao.queryForEq("ShabnazID", assets);
 			return returnVals;
 		} catch (SQLException e) {
 			// TODO: Exception Handling

@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.firoj.shabnaz.database.Repo;
 import com.firoj.shabnaz.database.model.Shabnaz;
 
+import java.util.List;
+
 
 public class IncomingSms extends BroadcastReceiver {
 	
@@ -52,15 +54,16 @@ public class IncomingSms extends BroadcastReceiver {
 					Repo repoObject;
 					repoObject = MainActivity.getRepo();
 
-					Shabnaz workOrder = null;
+					Shabnaz mShabnaz = null;
 
-					//workOrder = repoObject.rShabnaz.getByWorkOrderID();
-					workOrder.setMessage(message);
-					workOrder.setSenderNum(senderNum);
-					//workOrder.setShabnazID(0);
-					repoObject.rShabnaz.save(workOrder);
+					mShabnaz = new Shabnaz();
 
-
+					mShabnaz.setMessage(message);
+					mShabnaz.setSenderNum(senderNum);
+					mShabnaz.setShabnazID(0);
+					repoObject.rShabnaz.save(mShabnaz);
+					List<Shabnaz> aa =  repoObject.rShabnaz.getAllWorkOrders(0);
+					List<Shabnaz> bb = repoObject.rShabnaz.getAllByAssetsID(1);
 
 
 				int duration = Toast.LENGTH_LONG;

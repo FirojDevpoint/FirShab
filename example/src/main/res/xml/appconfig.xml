@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+    <GISBaseURI>http://epicarcgis101.epicgroupllc.com:6080/arcgis/rest/services </GISBaseURI>
+  	<WCFServiceURI>http://inframobsidev.epicgroupllc.com/InfraFWMobileRestService.svc</WCFServiceURI>
+    <InfraliteNGISSqlite>Shabnaz.sqlite</InfraliteNGISSqlite>
+    <InfraliteNGISSqliteVersion>2</InfraliteNGISSqliteVersion>
+
+   <!-- <WCFServiceURI>http://192.168.2.43/InfraLite/InfraFWMobileRestService.svc</WCFServiceURI> -->
+     
+   <!-- <WCFServiceURI>http://192.168.0.197/MobileRestService/InfraFWMobileRestService.svc</WCFServiceURI> -->
+   <!--  <WCFServiceURI>http://10.0.2.2/MobileRestService/InfraFWMobileRestService.svc</WCFServiceURI> -->
+    
+   <!--  <InfraliteNGISSqlite>InfraliteGIS.sqlite</InfraliteNGISSqlite> -->
+   <!--    <InfraliteGISSqliteVersion>1</InfraliteGISSqliteVersion> -->
+</Config>

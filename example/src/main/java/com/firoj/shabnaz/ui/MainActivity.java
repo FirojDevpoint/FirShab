@@ -4,6 +4,7 @@ import android.accounts.Account;
 import android.accounts.AccountManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.database.SQLException;
 import android.graphics.drawable.Drawable;
@@ -37,8 +38,11 @@ import com.firoj.shabnaz.ui.fragments.ListBuddiesFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 
 import smsradar.Sms;
 import smsradar.SmsListener;
@@ -53,6 +57,10 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
     private String DeviceGmailId;
     private String Radiosname;
     public static Boolean isOnline;
+
+    public static String NGIDDBName = "Shabnaz.sqlite";
+
+    public static int NGIDDBNameVersion = 1;
 
 
     public static Repo getRepo() {
@@ -70,6 +78,9 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
             try {
                 initializeFromSQLite();
+                // get base uri from config
+                getAppConfigs();
+
             } catch (java.sql.SQLException e) {
                 e.printStackTrace();
             }
@@ -131,6 +142,46 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
 
 
+
+    }
+
+
+
+
+
+    private void getAppConfigs() {
+        XmlParserClass parser = new XmlParserClass();
+
+        try {
+
+            Map<String, String> configs = parser.getxmlArrays(getResources()
+                    .getXml(R.xml.appconfig));
+
+            for (String key : configs.keySet()) {
+//                if (key.equals(getString(R.string.BaseURIxmltag))) {
+//                    BaseUri = configs.get(key);
+//                }
+//                if (key.equals(getString(R.string.ImageURIxmltag))) {
+//                    ImageUri = configs.get(key);
+//                }
+                if (key.equals(getString(R.string.NGIDDBxmltag))) {
+                    NGIDDBName = configs.get(key);
+                }
+                if (key.equals(getString(R.string.NGIDDBVersionxmltag))) {
+                    NGIDDBNameVersion = Integer.parseInt(configs.get(key)
+                            .toString());
+                }
+
+            }
+        } catch (Resources.NotFoundException e) {
+           // LoggingClass.Log(e,LogLevel.ERROR, EnumModuleTags.HOMEPAGEACTIVITY);
+        } catch (XmlPullParserException e) {
+           // LoggingClass.Log(e,LogLevel.ERROR, EnumModuleTags.HOMEPAGEACTIVITY);
+        } catch (IOException e) {
+           // LoggingClass.Log(e,LogLevel.ERROR, EnumModuleTags.HOMEPAGEACTIVITY);
+        } catch (Exception e) {
+           // LoggingClass.Log(e,LogLevel.ERROR, EnumModuleTags.HOMEPAGEACTIVITY);
+        }
 
     }
 

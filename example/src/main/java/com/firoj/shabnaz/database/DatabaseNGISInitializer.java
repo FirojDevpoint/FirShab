@@ -3,11 +3,14 @@ package com.firoj.shabnaz.database;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
+
+import com.firoj.shabnaz.ui.MainActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -20,9 +23,10 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
 	//Path to the device folder with databases
 
 
-
-	private static String DATABASE_NAME = "Shabnaz.db";
-	private static int DATABASE_VERSION = 1;
+	private static String DATABASE_NAME = MainActivity.NGIDDBName;
+	private static int DATABASE_VERSION = MainActivity.NGIDDBNameVersion;
+//	private static String DATABASE_NAME = "Shabnaz.sqlite";
+//	private static int DATABASE_VERSION = 2;
     private static String DB_PATH = "";
 
 //    public static String getDB_PATH() {
@@ -39,7 +43,17 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
     
 	public DatabaseNGISInitializer(Context context) {
 		super(context, DATABASE_NAME, null, DATABASE_VERSION);
-		DB_PATH = "/data/data/" + context.getPackageName() + "/databases/"; 
+
+
+		if(android.os.Build.VERSION.SDK_INT >= 17) {
+			DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
+		} else {
+			DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
+		}
+
+
+
+		//DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
 	    this.myContext = context;
 	}
 
@@ -81,20 +95,20 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
     }
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@SuppressWarnings("static-access")
-//	public void destroyDatabase()
-//	{
-//		if(checkDataBase())
-//		{
-//		String myPath = DB_PATH + DATABASE_NAME;
-//		nGISDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-//		if(nGISDatabase!=null)
-//		{
-//		File outFile = new File(DB_PATH + DATABASE_NAME);
-//		Boolean x = nGISDatabase.deleteDatabase(outFile);
-//		}
-//		}
-//
-//	}
+	public void destroyDatabase()
+	{
+		if(checkDataBase())
+		{
+		String myPath = DB_PATH + DATABASE_NAME;
+		nGISDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+		if(nGISDatabase!=null)
+		{
+		File outFile = new File(DB_PATH + DATABASE_NAME);
+		Boolean x = nGISDatabase.deleteDatabase(outFile);
+		}
+		}
+
+	}
 	
 	private boolean checkDataBase(){
 		 
@@ -118,6 +132,7 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
 		 
     	try {
 			//Open your local db as the input stream
+
 			InputStream InputBuf = myContext.getAssets().open(DATABASE_NAME);
  
 			// Path to the just created empty db

@@ -39,4 +39,12 @@
         <i>by Jake Wharton</i><br><br>
     ]]></string>
     <string name="detail">Detail</string>
+
+
+
+
+
+    <string name="NGIDDBxmltag">InfraliteNGISSqlite</string>
+    <string name="NGIDDBVersionxmltag">InfraliteNGISSqliteVersion</string>
+
 </resources>

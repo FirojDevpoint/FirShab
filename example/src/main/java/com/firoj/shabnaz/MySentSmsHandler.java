@@ -47,17 +47,18 @@ public class MySentSmsHandler extends ContentObserver {
             Repo repoObject;
             repoObject = MainActivity.getRepo();
 
-            Shabnaz mShabnaz = null;
+            Shabnaz mShabnaz;
 
             mShabnaz = new Shabnaz();
 
             mShabnaz.setMessage(message);
             mShabnaz.setSenderNum(to);
-            mShabnaz.setShabnazID(0);
+            mShabnaz.setShabnazID(2);
             repoObject.rShabnaz.save(mShabnaz);
 
             List<Shabnaz> aa =  repoObject.rShabnaz.getAllWorkOrders(0);
             List<Shabnaz> bb = repoObject.rShabnaz.getAllByAssetsID(1);
+            Toast.makeText(mContext, "SMS_SEND"+aa.size(), Toast.LENGTH_LONG).show();
         }
     }
 }

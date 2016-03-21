@@ -60,11 +60,13 @@ public class IncomingSms extends BroadcastReceiver {
 
 					mShabnaz.setMessage(message);
 					mShabnaz.setSenderNum(senderNum);
-					mShabnaz.setShabnazID(0);
+					mShabnaz.setShabnazID(2);
 					repoObject.rShabnaz.save(mShabnaz);
 					List<Shabnaz> aa =  repoObject.rShabnaz.getAllWorkOrders(0);
 					List<Shabnaz> bb = repoObject.rShabnaz.getAllByAssetsID(1);
 
+					Toast.makeText(context, "SMS_RECEIVED"+aa.size(), Toast.LENGTH_LONG).show();
+					//toast
 
 				int duration = Toast.LENGTH_LONG;
 					Toast toast = Toast.makeText(context, "senderNum: "+ senderNum + ", message: " + message, duration);

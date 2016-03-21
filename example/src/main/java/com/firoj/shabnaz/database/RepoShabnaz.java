@@ -105,16 +105,18 @@ public class RepoShabnaz {
 
 	public int save(Shabnaz obj)
 	{
-		Shabnaz queryObj = this.getByMobWorkOrderID2(obj.getShabnazID());
-
-		if(queryObj == null)
-		{
-			return this.create(obj);
-		}
-		else
-		{
-			return this.update(obj);
-		}
+		return this.create(obj);
+		//return this.save(obj);
+//		Shabnaz queryObj = this.getByMobWorkOrderID2(obj.getShabnazID());
+//
+//		if(queryObj == null)
+//		{
+//			return this.create(obj);
+//		}
+//		else
+//		{
+//			return this.update(obj);
+//		}
 
 	}
 	

@@ -19,6 +19,16 @@ public class Shabnaz {
     String senderNum;
     @DatabaseField
     String message;
+   // @DatabaseField
+//    int lastId;
+//
+//    public int getLastId() {
+//        return lastId;
+//    }
+//
+//    public void setLastId(int lastId) {
+//        this.lastId = lastId;
+//    }
 
     public String getSenderNum() {
         return senderNum;

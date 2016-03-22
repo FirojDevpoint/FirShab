@@ -50,27 +50,16 @@ public class IncomingSms extends BroadcastReceiver {
 
 			        Log.i("SmsReceiver", "senderNum: "+ senderNum + "; message: " + message);
 
-
 					Repo repoObject;
 					repoObject = MainActivity.getRepo();
-
-					Shabnaz mShabnaz = null;
-
+					Shabnaz mShabnaz;
 					mShabnaz = new Shabnaz();
-
 					mShabnaz.setMessage(message);
 					mShabnaz.setSenderNum(senderNum);
-					mShabnaz.setShabnazID(2);
+					mShabnaz.setShabnazID(0);
+					//mShabnaz.setLastId(0);
 					repoObject.rShabnaz.save(mShabnaz);
-					List<Shabnaz> aa =  repoObject.rShabnaz.getAllWorkOrders(0);
-					List<Shabnaz> bb = repoObject.rShabnaz.getAllByAssetsID(1);
-
-					Toast.makeText(context, "SMS_RECEIVED"+aa.size(), Toast.LENGTH_LONG).show();
-					//toast
-
-				int duration = Toast.LENGTH_LONG;
-					Toast toast = Toast.makeText(context, "senderNum: "+ senderNum + ", message: " + message, duration);
-					toast.show();
+					List<Shabnaz> aa = repoObject.rShabnaz.getAllWorkOrders(0);
 					
 				} // end for loop
               } // bundle is null

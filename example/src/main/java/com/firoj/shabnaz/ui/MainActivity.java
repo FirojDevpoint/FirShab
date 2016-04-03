@@ -86,24 +86,20 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
             }
            // initializeSmsRadarService();
 
-            try {
-                SessionManager session;
-                session = new SessionManager();
+            //                SessionManager session;
+//                session = new SessionManager(getBaseContext());
+//
+//                HashMap<String, String> Radious = session.getDeviceID();
+//                if(Radious!= null)
+//                {
+//                    Radiosname = Radious.get(SessionManager.KEY_DeviceId);
+//                }
+//
+//
+//                if (Radiosname != null) {
+//                    getMailInfo();
+//                }
 
-                HashMap<String, String> Radious = session.getDeviceID();
-                if(Radious!= null)
-                {
-                    Radiosname = Radious.get(SessionManager.KEY_DeviceId);
-                }
-
-
-                if (Radiosname != null) {
-                    getMailInfo();
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
         }
 
 //        boolean isWiFi = false;
@@ -198,8 +194,8 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
                 String UserID = null;
 
-                SessionManager session = new SessionManager();
-                session.createDeviceID(UserID);
+//                SessionManager session = new SessionManager(getBaseContext());
+//                session.createDeviceID(UserID);
 
             }
 

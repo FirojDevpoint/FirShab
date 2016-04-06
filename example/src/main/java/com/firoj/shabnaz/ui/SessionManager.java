@@ -30,7 +30,7 @@ public class SessionManager {
 	public HashMap<String, String> getCurrentId() {
 		try {
 			HashMap<String, String> user = new HashMap<>();
-			user.put(KEY_CurrentId, _sharedPreference.getString(KEY_CurrentId, null));
+			user.put(KEY_CurrentId, _sharedPreference.getString(KEY_CurrentId, "0"));
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();

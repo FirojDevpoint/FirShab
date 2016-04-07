@@ -82,8 +82,8 @@ public class MySentSmsHandler extends ContentObserver {
                     // mShabnaz.setLastId((int) lastId);
                     repoObject.rShabnaz.save(mShabnaz);
                     session.createLastID(Long.toString(lastId));
+
 //                    List<Shabnaz> aa = repoObject.rShabnaz.getAllWorkOrders(0);
-//
 //                    Shabnaz ShabnazObj = aa.get(0);
 //                    String a = ShabnazObj.getMessage();
 

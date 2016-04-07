@@ -40,6 +40,8 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".ui.AlarmReciever"/>
+
         <receiver android:name=".ui.IncomingSms">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />

@@ -52,6 +52,26 @@ public class RepoShabnaz {
 		}
 		return 0;
 	}
+
+	public void delAll()
+	{
+		try {
+
+			QueryBuilder<Shabnaz, String> qb = shabnazDao.queryBuilder();
+			Where<Shabnaz, String> where = qb.where();
+			where.gt("ShabnazID", 0);
+			PreparedQuery<Shabnaz> pq = qb.prepare();
+			List<Shabnaz> s = shabnazDao.query(pq);
+			for (int i =0; i<s.size();i++)
+			{
+				delete(s.get(i));
+			}
+
+		} catch (SQLException e) {
+			// TODO: Exception Handling
+			e.printStackTrace();
+		}
+	}
 	
 	public int delete_soft(Shabnaz Shabnaz)
 	{

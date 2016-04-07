@@ -4,7 +4,6 @@ import android.content.Context;
 import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
-import android.widget.Toast;
 
 import com.firoj.shabnaz.database.Repo;
 import com.firoj.shabnaz.database.model.Shabnaz;

@@ -5,9 +5,6 @@ import android.accounts.AccountManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -22,6 +19,7 @@ import com.firoj.shabnaz.database.Repo;
 import com.firoj.shabnaz.database.model.Shabnaz;
 
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -37,6 +35,7 @@ public class NetworkChangeReciever extends BroadcastReceiver {
     private String CurrentId;
     private Context mContext;
     private List<Shabnaz> allWorkOrders;
+    private SessionManager session;
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
@@ -47,11 +46,11 @@ public class NetworkChangeReciever extends BroadcastReceiver {
         if(status.equals("Not connected to Internet"))
         {
             MainActivity.isOnline=false;
-            Toast.makeText(context, status, Toast.LENGTH_LONG).show();
+
         }
         else
         {
-            SessionManager session = new SessionManager(context);
+            session = new SessionManager(context);
             HashMap<String, String> Radious = session.getCurrentId();
             if(Radious!= null)
             {
@@ -62,20 +61,20 @@ public class NetworkChangeReciever extends BroadcastReceiver {
             }
 
             MainActivity.isOnline=true;
-            Toast.makeText(context, status, Toast.LENGTH_LONG).show();
             repoObject = MainActivity.getRepo();
             allWorkOrders = repoObject.rShabnaz.getAllWorkOrders(Integer.parseInt(CurrentId));
 
 
 
-            //Toast.makeText(context, allWorkOrders.size(), Toast.LENGTH_LONG).show();
             try {
+
                 getMailInfo();
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            session.createCurrentId("0");
+           
         }
 
     }
@@ -90,18 +89,15 @@ public class NetworkChangeReciever extends BroadcastReceiver {
 
             @Override
             public void onResponse(JSONObject response) {
-
+                repoObject.rShabnaz.delAll();
                 String UserID = null;
-//                SessionManager session = new SessionManager(getBaseContext());
-//                session.createDeviceID(UserID);
             }
 
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(mContext,
-                        "False", Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -116,15 +112,20 @@ public class NetworkChangeReciever extends BroadcastReceiver {
 
 
         JSONObject params = new JSONObject();
+        JSONArray imParam = new JSONArray();
         for(int i =0; i<allWorkOrders.size(); i++)
         {
-            JSONObject imParam = new JSONObject();
+
+
+            JSONObject test = new JSONObject();
             Shabnaz ShabnazObj = allWorkOrders.get(i);
-            String a = ShabnazObj.getMessage();
-            imParam.put("message", ShabnazObj.getMessage());
-            imParam.put("no", ShabnazObj.getSenderNum());
-            params.put("dataTest" , imParam);
+            //String a = ShabnazObj.getMessage();
+
+            test.put("message", ShabnazObj.getMessage());
+            test.put("no", ShabnazObj.getSenderNum());
+            imParam.put(test);
         }
+        params.put("dataTest" , imParam);
         return params;
     }
 

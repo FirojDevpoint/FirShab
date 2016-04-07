@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.firoj.shabnaz.R;
 import com.firoj.shabnaz.adapters.CircularAdapter;
@@ -52,7 +51,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
         super.onCreate(savedInstanceState);
         isOpenActivities = getArguments().getBoolean(ExtraArgumentKeys.OPEN_ACTIVITES.toString(), false);
         mMarginDefault = getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
-        mScrollConfig = getResources().getIntArray(R.attr.scrollFaster);
+        mScrollConfig = getResources().getIntArray(+R.attr.scrollFaster);
     }
 
     @Override
@@ -87,7 +86,7 @@ public class ListBuddiesFragment extends Fragment implements ListBuddiesLayout.O
             startActivity(intent);
         } else {
             Resources resources = getResources();
-            Toast.makeText(getActivity(), resources.getString(R.string.list) + ": " + buddy + " " + resources.getString(R.string.position) + ": " + position, Toast.LENGTH_SHORT).show();
+
         }
     }
 

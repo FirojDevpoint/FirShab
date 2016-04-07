@@ -2,6 +2,8 @@ package com.firoj.shabnaz.ui;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -20,7 +22,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -41,6 +42,7 @@ import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,41 +104,20 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
         }
 
-//        boolean isWiFi = false;
-//        boolean isMOBILE = false;
-//        boolean isOnline = true;
-//
-//        try {
-//            ConnectivityManager cm =
-//                    (ConnectivityManager) getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-//
-//            NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-//            boolean isConnected = activeNetwork != null &&
-//                    activeNetwork.isConnectedOrConnecting();
-//
-//            if (!isConnected) {
-//                if (activeNetwork != null) {
-//                    isWiFi = activeNetwork.getType() == ConnectivityManager.TYPE_WIFI;
-//                    isMOBILE = activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE;
-//
-//                    int duration = Toast.LENGTH_LONG;
-//                    Toast toast = Toast.makeText(getApplicationContext(), "senderNum: ", duration);
-//                    toast.show();
-//                }
-//            }
-//
-//            isOnline = isConnected || isWiFi || isMOBILE;
-//        }
-//        catch (Exception e)
-//        {
-//            e.printStackTrace();
-//        }
         ContentObserver observer=new MySentSmsHandler(getApplicationContext());
         getApplicationContext().getContentResolver().registerContentObserver(
                 Uri.parse("content://sms"), true, observer);
 
 
 
+
+
+
+
+        Long time = new GregorianCalendar().getTimeInMillis()+24*60*60*1000;
+        Intent intentAlarm = new Intent(this, AlarmReciever.class);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this, 1, intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 
 
     }
@@ -204,8 +185,7 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(),
-                        "False", Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -247,7 +227,6 @@ public class MainActivity extends ActionBarActivity implements CustomizeFragment
 
 
     private void showSmsToast(Sms sms) {
-        Toast.makeText(this, sms.toString(), Toast.LENGTH_LONG).show();
 
     }
 

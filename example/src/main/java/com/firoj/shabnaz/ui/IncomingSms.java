@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.firoj.shabnaz.database.Repo;
 import com.firoj.shabnaz.database.model.Shabnaz;
@@ -26,13 +25,6 @@ public class IncomingSms extends BroadcastReceiver {
 		final Bundle bundle = intent.getExtras();
 
 
-//		if (intent.getAction().equals("android.provider.Telephony.SMS_RECEIVED")){
-//			Toast.makeText(context, "SMS_RECEIVED", Toast.LENGTH_LONG).show();
-//		}else  if(intent.getAction().equals("android.provider.Telephony.SMS_DELIVER")){
-//			Toast.makeText(context, "SMS_DELIVER", Toast.LENGTH_LONG).show();
-//		}else  if(intent.getAction().equals("android.provider.Telephony.sms_sent")){
-//			Toast.makeText(context, "sms_sent", Toast.LENGTH_LONG).show();
-//		}
 
 		try {
 			

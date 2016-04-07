@@ -78,7 +78,7 @@ public class CustomizeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mScrollSpinnerValues = getActivity().getResources().getIntArray(R.attr.scrollFaster);
+        mScrollSpinnerValues = getActivity().getResources().getIntArray(+R.attr.scrollFaster);
     }
 
     @Override

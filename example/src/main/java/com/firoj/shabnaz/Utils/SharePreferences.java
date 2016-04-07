@@ -7,16 +7,26 @@ import com.firoj.shabnaz.provider.SharedPrefFiles;
 import com.firoj.shabnaz.provider.SharedPrefKeys;
 import com.jpardogo.listbuddies.lib.views.ListBuddiesLayout;
 
+import java.security.spec.ECField;
+
 /**
  * Created by jpardogo on 23/02/2014.
  */
 public class SharePreferences {
 
     public static void saveCustomization(SharedPrefKeys prefKey, int progress) {
-        SharedPreferences customize_pref = getCustomizePref();
-        SharedPreferences.Editor editor = customize_pref.edit();
-        editor.putInt(prefKey.toString(), progress);
-        editor.commit();
+        try
+        {
+            SharedPreferences customize_pref = getCustomizePref();
+            SharedPreferences.Editor editor = customize_pref.edit();
+            editor.putInt(prefKey.toString(), progress);
+            editor.commit();
+        }
+        catch (Exception Ex)
+        {
+
+        }
+
     }
 
     public static int getValue(SharedPrefKeys prefKey) {
@@ -26,20 +36,45 @@ public class SharePreferences {
     }
 
     private static SharedPreferences getCustomizePref() {
-        return ListBuddies.getAppContext().getSharedPreferences(SharedPrefFiles.CUSTOMIZE_SETTINGS.toString(), 0);
+        //int defaultValue;
+        SharedPreferences defaultValue = null;
+        try
+        {
+            defaultValue  = ListBuddies.getAppContext().getSharedPreferences(SharedPrefFiles.CUSTOMIZE_SETTINGS.toString(), 0);
+        }
+        catch(Exception Ex)
+        {
+
+        }
+
+        return defaultValue;
     }
 
     private static int getDefaultValue(SharedPrefKeys prefKey) {
         int defaultValue = 0;
         switch (prefKey) {
             case GAP_PROGRESS:
-                defaultValue = ListBuddies.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                try {
+                    defaultValue = ListBuddies.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                }
+                catch (Exception Ex)
+                {
+
+                }
+
                 break;
             case SPEED_PROGRESS:
                 defaultValue = ListBuddiesLayout.DEFAULT_SPEED;
                 break;
             case DIV_HEIGHT_PROGRESS:
-                defaultValue = ListBuddies.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                try {
+                    defaultValue = ListBuddies.getAppContext().getResources().getDimensionPixelSize(com.jpardogo.listbuddies.lib.R.dimen.default_margin_between_lists);
+                }
+                catch (Exception Ex)
+                {
+
+                }
+
                 break;
         }
         return defaultValue;

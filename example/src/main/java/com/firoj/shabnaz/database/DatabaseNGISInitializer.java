@@ -95,20 +95,20 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
     }
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 	@SuppressWarnings("static-access")
-	public void destroyDatabase()
-	{
-		if(checkDataBase())
-		{
-		String myPath = DB_PATH + DATABASE_NAME;
-		nGISDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
-		if(nGISDatabase!=null)
-		{
-		File outFile = new File(DB_PATH + DATABASE_NAME);
-		Boolean x = nGISDatabase.deleteDatabase(outFile);
-		}
-		}
-
-	}
+//	public void destroyDatabase()
+//	{
+//		if(checkDataBase())
+//		{
+//		String myPath = DB_PATH + DATABASE_NAME;
+//		nGISDatabase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE);
+//		if(nGISDatabase!=null)
+//		{
+//		File outFile = new File(DB_PATH + DATABASE_NAME);
+//		Boolean x = nGISDatabase.deleteDatabase(outFile);
+//		}
+//		}
+//
+//	}
 	
 	private boolean checkDataBase(){
 		 
@@ -116,10 +116,11 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
  
     	try{
     		String myPath = DB_PATH + DATABASE_NAME;
-    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READONLY);
+    		checkDB = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.CREATE_IF_NECESSARY);
  
     	}catch(SQLiteException e){
      		//database does't exist yet.
+			e.printStackTrace();
      	}
      	if(checkDB != null){
  
@@ -132,6 +133,7 @@ public class DatabaseNGISInitializer extends SQLiteOpenHelper{
 		 
     	try {
 			//Open your local db as the input stream
+
 
 			InputStream InputBuf = myContext.getAssets().open(DATABASE_NAME);
  

@@ -38,7 +38,7 @@ public class DatabaseNGISHelper extends OrmLiteSqliteOpenHelper {
 		DatabaseNGISInitializer initializer = new DatabaseNGISInitializer(
 				context);
 		try {
-			 initializer.destroyDatabase();
+			//initializer.destroyDatabase();
 			initializer.createDataBase();
 			initializer.close();
 		} catch (IOException e) {

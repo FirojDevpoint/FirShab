@@ -51,9 +51,9 @@ public class IncomingSms extends BroadcastReceiver {
 					mShabnaz.setShabnazID(0);
 					//mShabnaz.setLastId(0);
 					repoObject.rShabnaz.save(mShabnaz);
-					List<Shabnaz> aa = repoObject.rShabnaz.getAllWorkOrders(0);
-					Shabnaz ShabnazObj = aa.get(0);
-					String a = ShabnazObj.getMessage();
+//					List<Shabnaz> aa = repoObject.rShabnaz.getAllWorkOrders(0);
+//					Shabnaz ShabnazObj = aa.get(0);
+//					String a = ShabnazObj.getMessage();
 				} // end for loop
               } // bundle is null
 

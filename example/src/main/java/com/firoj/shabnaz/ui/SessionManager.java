@@ -54,7 +54,7 @@ public class SessionManager {
 	public HashMap<String, String> getLastID() {
 		try {
 			HashMap<String, String> user = new HashMap<>();
-			user.put(KEY_LastID, _sharedPreference.getString(KEY_LastID, null));
+			user.put(KEY_LastID, _sharedPreference.getString(KEY_LastID, "0"));
 			return user;
 		} catch (Exception e) {
 			e.printStackTrace();
